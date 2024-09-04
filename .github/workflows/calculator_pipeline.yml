@@ -41,4 +41,4 @@ jobs:
 
       - name: Run Calculator
         run: |
-          docker run calculator python calculator.py --add 1 7
+          docker run calculator python -s BE calculator.py --add 1 7
