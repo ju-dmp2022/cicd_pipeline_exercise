@@ -1,21 +1,20 @@
+name: Calculator Pipeline
 
-name: Calculator-Pipeline
-
-on: 
-  push: 
+on:
+  push:
     branches: [main]
-  pull_request: 
+  pull_request:
     branches: [main]
 
-jobs: 
+jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps: 
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Set up python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
@@ -24,13 +23,13 @@ jobs:
         run: |
           cd BE
           python -m pip install --upgrade pip
-          pip install -r requirement.txt
+          pip install -r requirements.txt
 
-      - name: Run Tests 
+      - name: Run Tests
         run: |
           cd BE
           python -m unittest discover -s tests
-        
+
       - name: Build Docker Image
         run: |
           docker build -t calculator BE/.
