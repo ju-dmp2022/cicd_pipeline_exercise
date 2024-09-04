@@ -1,0 +1,18 @@
+#I found this in docker hub just by searching python
+FROM python:3.12-slim 
+
+#here we copy the content of BE folder into /app folder in the docker container
+COPY . /app/
+
+#just setting the working folder in the container
+WORKDIR /app
+
+#Using --no-cache-dir during package installation in a Dockerfile
+#helps keep the Docker images smaller by avoiding the storage of unnecessary cached files.
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set the entrypoint to python, so it runs the script
+ENTRYPOINT ["python", "calculator.py"]
+
+# Provide default arguments to the entrypoint
+CMD ["--multiply", "3", "7"]
