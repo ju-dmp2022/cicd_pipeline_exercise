@@ -6,8 +6,6 @@
 2. [Resources](#resources)
 3. [Installation](#installation)
 
-## TOC
-This section will provide an overview of the project's Table of Contents.
 
 ## Resources
 A collection of useful links for further reading and reference:
@@ -18,12 +16,15 @@ A collection of useful links for further reading and reference:
 ## Installation
 To install the required dependencies for this project, run the following command:
 
+
+**The sets up the pip enabled**
+```cmd
+python -m pip install --upgrade pip
+```
+
 **This command installs all the Python packages and dependencies listed in the requirements.txt file located in the BE (Back-End) directory.**
 ```cmd
 pip install -r BE/requirements.txt
 ```
 
-**This command installs FastAPI and Uvicorn, which are essential for running the web application**
-```cmd
-pip install fastapi[all] uvicorn
-```
+ 
