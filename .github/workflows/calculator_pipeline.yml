@@ -30,9 +30,8 @@ jobs:
         run: echo "PYTHONPATH=$(pwd)/BE" >> $GITHUB_ENV
 
       - name: Run Tests
-        run: |
-          cd BE/tests
-          python -m unittest discover -s . -p "*.py"
+        run:
+          python -m unittest discover -s BE/tests -p "*.py"
       
 
       - name: Build Docker Image
