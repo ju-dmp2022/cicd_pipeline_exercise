@@ -25,6 +25,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install test dependencies
+        run: |
+          cd BE
+          pip install -r requirements-test.txt
+
       - name: Run Tests
         run: |
           cd BE
@@ -32,7 +37,8 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t calculator BE/
+          cd BE
+          docker build -t calculator .
 
       - name: Run Calculator
         run: |

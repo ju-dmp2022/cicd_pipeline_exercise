@@ -3,7 +3,7 @@ import os        #check readme file for more info
 
 # Global logger configuration
 log_file = 'BE/information.log'
-formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(module)s:%(message)s')
+formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
 
 def configure_logging(log_file):
     """Configure logging for the application."""
@@ -75,12 +75,12 @@ class CalculatorHelper:
         return a * b
 
     def divide(self, a, b):
-        try:
-            result = a / b
-        except ZeroDivisionError:
+        if b == 0:
             self.logger.exception('Tried division by zero')
-        else:
-            return result
+            return None  # Return None or any other meaningful value
+        return a / b
+
+
 
 def perform_and_log_calculations(calculator, a, b):
     """Perform calculations and log the results in information.log you create with the script."""
@@ -102,7 +102,7 @@ calculator = CalculatorHelper()
 
 # set the values of numbers which we want to calculate
 number_a = 49
-number_b = 0
+number_b = 7
 
 # Perform calculations and log the results
 perform_and_log_calculations(calculator, number_a, number_b)
