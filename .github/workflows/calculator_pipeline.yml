@@ -36,9 +36,9 @@ jobs:
       - name: Build Docker Image
         run: |
           cd BE
-          docker build -t calculator .
+          docker build -t calculator:5.0 .
 
       - name: Run Calculator
         run: |
-          docker run ali_kouravand_calculator_image:1.0 --add 1 7
+          docker run calculator:5.0 --add 1 7
 
