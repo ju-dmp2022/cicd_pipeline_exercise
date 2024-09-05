@@ -1,19 +1,23 @@
-#I found this in docker hub just by searching python
-FROM python:3.12-slim 
+# Stage 1: Build
+FROM python:3.12-slim as build
 
-#here we copy the content of BE folder into /app folder in the docker container
-COPY . /app/
-
-#just setting the working folder in the container
 WORKDIR /app
 
-#Using --no-cache-dir during package installation in a Dockerfile
-#helps keep the Docker images smaller by avoiding the storage of unnecessary cached files.
-# Install dependencies from requirements.txt and requirements-test.txt
+COPY BE/requirements.txt BE/requirements-test.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir -r requirements-test.txt
 
-# Set the entrypoint to python, so it runs the script
+COPY BE/ .
+
+# Stage 2: Runtime
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# Copy only necessary files from the build stage
+COPY --from=build /app /app
+
+# Set the entrypoint to run the application
 ENTRYPOINT ["python", "calculator.py"]
 
 # Provide default arguments to the entrypoint
