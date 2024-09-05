@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -30,15 +30,30 @@ jobs:
         run: echo "PYTHONPATH=$(pwd)/BE" >> $GITHUB_ENV
 
       - name: Run Tests
-        run:
-          python -m unittest discover -s BE/tests -p "*.py"
+        run: |
+          cd BE
+          python -m unittest discover -s tests -p "*.py"
 
       - name: Build Docker Image
         run: |
           cd BE
           docker build -t calculator:5.0 .
 
+      - name: Tag Docker Image
+        run: |
+          docker tag calculator:5.0 judevops.azurecr.io/ali_kouravand_calculator_image:5.0
+
+      - name: Login to Azure Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: judevops.azurecr.io
+          username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
+          password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+
+      - name: Push Docker Image to Azure Container Registry
+        run: |
+          docker push judevops.azurecr.io/ali_kouravand_calculator_image:5.0
+
       - name: Run Calculator
         run: |
-          docker run calculator:5.0 --add 1 7
-
+          docker run judevops.azurecr.io/ali_kouravand_calculator_image:5.0 --add 1 7
