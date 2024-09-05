@@ -27,7 +27,7 @@ class TestCalculatorHelper(unittest.TestCase):
 
     def test_divide_by_zero(self):
         result = self.calculator.divide(10, 0)
-        self.assertIsNone(result)  # Since the logger is used and the result is None
+        self.assertIsNone(result)  
 
 if __name__ == '__main__':
     unittest.main()
