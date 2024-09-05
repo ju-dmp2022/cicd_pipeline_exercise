@@ -32,7 +32,6 @@ jobs:
       - name: Run Tests
         run:
           python -m unittest discover -s BE/tests -p "*.py"
-      
 
       - name: Build Docker Image
         run: |
@@ -41,4 +40,5 @@ jobs:
 
       - name: Run Calculator
         run: |
-          docker run calculator python -s BE calculator.py --add 1 7
+          docker run ali_kouravand_calculator_image:1.0 --add 1 7
+

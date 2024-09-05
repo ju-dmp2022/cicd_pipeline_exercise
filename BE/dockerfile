@@ -9,7 +9,9 @@ WORKDIR /app
 
 #Using --no-cache-dir during package installation in a Dockerfile
 #helps keep the Docker images smaller by avoiding the storage of unnecessary cached files.
+# Install dependencies from requirements.txt and requirements-test.txt
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements-test.txt
 
 # Set the entrypoint to python, so it runs the script
 ENTRYPOINT ["python", "calculator.py"]
