@@ -1,3 +1,4 @@
 pytest==7.2.1
 coverage==6.5.0
 mock==5.0.0
+assertpy==2.0.0
