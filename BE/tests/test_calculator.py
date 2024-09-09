@@ -1,5 +1,6 @@
 import unittest
 from BE.calculator_helper import CalculatorHelper
+# from assertpy import assert_that as at
 
 class TestCalculatorHelper(unittest.TestCase):
     def setUp(self):
@@ -9,6 +10,7 @@ class TestCalculatorHelper(unittest.TestCase):
         self.assertEqual(self.calculator.add(1, 7), 8)
         self.assertEqual(self.calculator.add(-1, -1), -2)
         self.assertEqual(self.calculator.add(-1, 1), 0)
+        self.assertEqual(self.calculator.add(4, -8), -4)
 
     def test_subtract(self):
         self.assertEqual(self.calculator.subtract(10, 5), 5)

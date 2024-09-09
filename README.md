@@ -27,4 +27,25 @@ python -m pip install --upgrade pip
 pip install -r BE/requirements.txt
 ```
 
+
+### Tests
+**This command is for running the pytest on the machine**
+```cmd
+python -m pytest --maxfail=1 --exitfirst --strict-markers
+```
+- **`python`**: This invokes the Python interpreter. It ensures that the command is executed using the correct Python environment, which is especially important when working with virtual environments.
+
+- **`-m`**: This flag tells Python to run a module as a script. The module name follows the `-m` flag. In this case, `pytest` is the module being executed.
+
+- **`pytest`**: `pytest` is a powerful testing framework for Python that makes it easy to write simple and scalable test cases. Running this module discovers and executes the tests in your project, and then provides a detailed report of the results.
+
+- **`--maxfail=1`**: This option instructs `pytest` to stop running tests after the first test failure is encountered. This is useful in CI/CD pipelines because it allows the pipeline to fail quickly, providing immediate feedback on critical issues and saving resources by not running the entire test suite when a problem is detected early.
+
+- **`--exitfirst`**: This option complements `--maxfail=1` by immediately exiting after the first test failure, further ensuring that the pipeline fails fast. This can be particularly helpful when the goal is to address the first failing test before moving on to the rest.
+
+- **`--strict-markers`**: This option enforces strict handling of custom markers in your test suite. If a marker is used in your tests but is not registered in your `pytest` configuration (e.g., `pytest.ini` or `conftest.py`), `pytest` will raise an error. This helps maintain consistency and prevents typos or misconfigurations from slipping through in the CI/CD pipeline.
+
+
+
+
  
