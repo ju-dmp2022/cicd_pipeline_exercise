@@ -26,7 +26,11 @@ python -m pip install --upgrade pip
 ```cmd
 pip install -r BE/requirements.txt
 ```
-
+- for more information on assertpy, chekout [assertpy documentation](https://pypi.org/project/assertpy/#description)
+**Check the current version of asssertpy**
+´´´cmd
+pip show assertpy
+´´´
 
 ### Tests
 **This command is for running the pytest on the machine**
@@ -45,6 +49,13 @@ python -m pytest --maxfail=1 --exitfirst --strict-markers
 
 - **`--strict-markers`**: This option enforces strict handling of custom markers in your test suite. If a marker is used in your tests but is not registered in your `pytest` configuration (e.g., `pytest.ini` or `conftest.py`), `pytest` will raise an error. This helps maintain consistency and prevents typos or misconfigurations from slipping through in the CI/CD pipeline.
 
+
+
+**Code Coverage**
+´´´´cmd
+python -m pytest --cov
+´´´
+- **`--code-coverage`**: the other one way with "pytest" as start does not work for my machine and as a windows 10 and above user i recommend using this.
 
 
 
