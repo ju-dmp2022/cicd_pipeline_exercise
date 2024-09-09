@@ -1,6 +1,6 @@
 import unittest
 from BE.calculator_helper import CalculatorHelper
-# from assertpy import assert_that as at
+from assertpy import assert_that as at
 
 class TestCalculatorHelper(unittest.TestCase):
     def setUp(self):
@@ -11,11 +11,15 @@ class TestCalculatorHelper(unittest.TestCase):
         self.assertEqual(self.calculator.add(-1, -1), -2)
         self.assertEqual(self.calculator.add(-1, 1), 0)
         self.assertEqual(self.calculator.add(4, -8), -4)
+        result = self.calculator.add(1, 9)
+        at(result).is_equal_to(10)
+        
 
     def test_subtract(self):
         self.assertEqual(self.calculator.subtract(10, 5), 5)
         self.assertEqual(self.calculator.subtract(-1, -1), 0)
         self.assertEqual(self.calculator.subtract(-1, 1), -2)
+        assert self.calculator.add(3, 4) == 7
 
     def test_multiply(self):
         self.assertEqual(self.calculator.multiply(3, 4), 12)
