@@ -1,8 +1,8 @@
 import pytest
-from base_test import base_calculator_test
+from base_test import BaseCalculatorTest
 
 # GP = Good Practice
-class TestCalculatorHelper(base_calculator_test):
+class TestCalculatorHelper(BaseCalculatorTest):
         
     #fixture to provide data (GP)
     @pytest.fixture
@@ -13,6 +13,7 @@ class TestCalculatorHelper(base_calculator_test):
         
     #(GP)
     def test_add(self, value):
+        
         #arrange
         a = value['a']
         b = value['b']
@@ -55,6 +56,8 @@ class TestCalculatorHelper(base_calculator_test):
         
     # exception
     def test_division_by_zero(self):
+        """return None as exception when dividing by zero"""
+        
         # Arrange
         a = 33
         b = 0
