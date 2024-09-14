@@ -1,25 +1,15 @@
 import pytest
-from BE.calculator_helper import CalculatorHelper
-from assertpy import assert_that as at
-
+from base_test import base_calculator_test
 
 # GP = Good Practice
-class TestCalculatorHelper():
+class TestCalculatorHelper(base_calculator_test):
         
     #fixture to provide data (GP)
     @pytest.fixture
     def value(self):
-        return {'a': 33, 'b': 3}
+        return {'a': 33, 'b': -3}
     
     
-    #this will set the calculator up for each func
-    def setup_method(self):
-        print('はじめる!')
-        self.calculator = CalculatorHelper()
-    
-    def teardown_method(self):
-        print('まって')
-        del self.calculator  #this will delete the insatnce
         
     #(GP)
     def test_add(self, value):
@@ -31,7 +21,7 @@ class TestCalculatorHelper():
         add = self.calculator.add(a, b)
         
         #assert
-        assert add == 36
+        assert add == 30
         
     #(GP)
     def test_subtract(self, value):
@@ -41,7 +31,7 @@ class TestCalculatorHelper():
         
         sub = self.calculator.subtract(a, b)
         
-        assert sub == 30
+        assert sub == 36
         
     #(GP)
     def test_multiply(self, value):
@@ -51,7 +41,7 @@ class TestCalculatorHelper():
         
         multi = self.calculator.multiply(a, b)
         
-        assert multi == 99
+        assert multi == -99
         
     #(GP)
     def test_division(self, value):
@@ -61,8 +51,9 @@ class TestCalculatorHelper():
         
         divide = self.calculator.divide(a, b)
         
-        assert divide == 11
+        assert divide == -11
         
+    # exception
     def test_division_by_zero(self):
         # Arrange
         a = 33
