@@ -27,12 +27,30 @@ python -m pip install --upgrade pip
 pip install -r BE/requirements.txt
 ```
 - for more information on assertpy, chekout [assertpy documentation](https://pypi.org/project/assertpy/#description)
+
 **Check the current version of asssertpy**
 ´´´cmd
 pip show assertpy
 ´´´
 
-### Tests
+**To install the openapi python client**
+´´´cmd
+pip install openapi-python-client
+´´´
+
+**To install the API client folder**
+´´´cmd
+python -m openapi_python_client generate --url http://localhost:5000/openapi.json
+´´´
+
+
+
+
+
+## Tests
+
+### Unittesting
+
 **This command is for running the pytest on the machine**
 ```cmd
 python -m pytest --maxfail=1 --exitfirst --strict-markers
@@ -57,6 +75,12 @@ python -m pytest --cov
 ´´´
 - **`--code-coverage`**: the other one way with "pytest" as start does not work for my machine and as a windows 10 and above user i recommend using this.
 
+### Integration testing
+
+**API start**
+´´´´cmd
+python BE/calculator.py --rest
+´´´
 
 
  
