@@ -83,7 +83,7 @@ jobs:
         run: |
           docker run -d judevops.azurecr.io/ali_kouravand_calculator_ci:${{ github.sha }} --add 1 7
 
-      - name: Docker Cleanup # (GP) Clean up my disc spacve ffs -_-
-        run: |
-          docker system prune -af
+      # - name: Docker Cleanup # (GP) Clean up my disc spacve ffs -_-
+      #   run: |
+      #     docker system prune -af
         
