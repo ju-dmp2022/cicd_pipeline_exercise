@@ -2,10 +2,9 @@
 
 ## Table of Contents
 
-1. [TOC](#toc)
-2. [Resources](#resources)
-3. [Installation](#installation)
-4. [Docker](#Docker-Issues)
+1. [Resources](#resources)
+2. [Installation](#installation)
+3. [Docker](#Docker-Issues)
 
 
 ## Resources
