@@ -5,6 +5,7 @@
 1. [TOC](#toc)
 2. [Resources](#resources)
 3. [Installation](#installation)
+4. [Docker](#Docker-Issues)
 
 
 ## Resources
