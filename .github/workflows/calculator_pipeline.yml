@@ -58,6 +58,7 @@ jobs:
           name: junit-report
           path: report.xml
 
+        # Azure Container Registry (ACR)  
       - name: Log in to Azure Container Registry
         uses: docker/login-action@v2
         with:
@@ -83,7 +84,16 @@ jobs:
         run: |
           docker run -d judevops.azurecr.io/ali_kouravand_calculator_ci:${{ github.sha }} --add 1 7
 
-      # - name: Docker Cleanup # (GP) Clean up my disc spacve ffs -_-
-      #   run: |
-      #     docker system prune -af
+          - name: Cleanup Old Containers
+          run: |
+            docker ps -q --filter "status=running" | xargs -I {} sh -c '
+              if [ $(docker inspect -f "{{.State.StartedAt}}" {} | sed "s/[^0-9]*//g") -lt $(date -d "24 hours ago" +%s) ]; then
+                echo "Removing container {}";
+                docker rm -f {};
+              fi
+            '
+  
+      - name: Docker Cleanup
+        run: |
+          docker system prune -af
         
