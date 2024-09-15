@@ -4,3 +4,4 @@ uvicorn
 numpy
 argparse
 opencensus-ext-azure
+httpx==0.24.0 
