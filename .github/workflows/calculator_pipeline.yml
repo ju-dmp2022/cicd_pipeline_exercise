@@ -83,7 +83,19 @@ jobs:
         run: |
           docker run -d judevops.azurecr.io/ali_kouravand_calculator_ci:${{ github.sha }} --add 1 7
 
-      - name: Docker Cleanup # (GP) Clean up my disc spacve, remmove unused Docker resources not used for the past 24 hours -_-
+      
+      - name: Docker Cleanup # Remove Docker images older than 24 hours
         run: |
-          docker system prune -af --filter "until=24h" 
-        # here i will delete the docker image  
+            
+            docker images --format '{{.ID}} {{.CreatedAt}}' | \
+            while read -r image_id created_at; do
+              
+              created_epoch=$(date -d "$created_at" +%s)
+              current_epoch=$(date +%s)
+              age=$((current_epoch - created_epoch))
+              
+              
+              if [ $age -gt 86400 ]; then
+                docker rmi $image_id
+              fi
+            done
