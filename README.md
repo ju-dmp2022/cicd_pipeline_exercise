@@ -78,9 +78,17 @@ python -m pytest --cov
 ### Integration testing
 
 **API start**
-´´´´cmd
+´´´cmd
 python BE/calculator.py --rest
 ´´´
 
 
- 
+ ## Docker Issues
+
+ **docker is not running**
+ - if you get an issue in the terminal when running any docker command that looks like this:
+
+ ```cmd
+ ERROR: error during connect: Head "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/_ping": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.¨
+ ```
+ - then you probably need to run docker on your desktop, (right-click the logo on if you can find it in the windows bar and hit 'restart')

@@ -1,3 +1,5 @@
+
+# GP = Good Practice
 name: Calculator Pipeline
 
 on:
@@ -9,6 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    env:
+      PYTHONPATH: ./BE # Set PYTHONPATH to the BE directory for faster access and enhanced readability (GP)
 
     steps:
       - name: Checkout repository
@@ -29,14 +34,18 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
+        working-directory: BE
         run: |
-          cd BE
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r requirements-test.txt
 
-      - name: Set PYTHONPATH
-        run: echo "PYTHONPATH=$(pwd)/BE" >> $GITHUB_ENV
+      - name: Start REST API
+        working-directory: BE
+        run: |
+          nohup python calculator.py --rest & 
+          sleep 15 
+         # Adjust this based on how long it takes for your server to start
 
       - name: Run Tests
         run: |
@@ -51,18 +60,23 @@ jobs:
           password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
 
       - name: Build Docker Image
+        working-directory: BE
         run: |
-          cd BE
-          docker build -t ali_kouravand_calculator_ci:6.0 .
-
+          docker build -t ali_kouravand_calculator_ci:${{ github.sha }} .
+      
       - name: Tag Docker Image
         run: |
-          docker tag ali_kouravand_calculator_ci:6.0 judevops.azurecr.io/ali_kouravand_calculator_ci:6.0
-
+          docker tag ali_kouravand_calculator_ci:${{ github.sha }} judevops.azurecr.io/ali_kouravand_calculator_ci:${{ github.sha }}
+      
       - name: Push Docker Image
         run: |
-          docker push judevops.azurecr.io/ali_kouravand_calculator_ci:6.0
-
+          docker push judevops.azurecr.io/ali_kouravand_calculator_ci:${{ github.sha }}
+      
+      
       - name: Run Calculator
         run: |
-          docker run judevops.azurecr.io/ali_kouravand_calculator_ci:6.0 --add 1 7
+          docker run -d judevops.azurecr.io/ali_kouravand_calculator_ci:${{ github.sha }} --add 1 7
+
+      - name: Docker Cleanup # (GP) Clean up my disc spacve
+        run: |
+          docker system prune -af
