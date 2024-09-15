@@ -83,19 +83,7 @@ jobs:
         run: |
           docker run -d judevops.azurecr.io/ali_kouravand_calculator_ci:${{ github.sha }} --add 1 7
 
-      - name: Docker Cleanup # Remove Docker images older than 1 hour
+      - name: Docker Cleanup # (GP) Clean up my disc spacve ffs -_-
         run: |
-          docker images --format '{{.ID}} {{.CreatedAt}}' | \
-          while read -r image_id created_at; do
-            echo "Processing image: $image_id with created at: $created_at"
-            created_at=$(echo "$created_at" | sed 's/ UTC//')
-            created_epoch=$(date -d "$created_at" +%s)
-            current_epoch=$(date +%s)
-            age=$((current_epoch - created_epoch))
-            echo "Image age in seconds: $age"
-            if [ $age -gt 3600 ]; then
-              docker rmi $image_id
-            fi
-          done
-        shell: bash
+          docker system prune -af
         
