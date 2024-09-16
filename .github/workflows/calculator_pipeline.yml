@@ -49,15 +49,16 @@ jobs:
 
       - name: Run Tests
         run: |
-          python -m pytest -s -v --maxfail=1 --exitfirst --strict-markers --junit-xml=report.xml
+          python -m pytest -s -v --maxfail=1 --exitfirst --strict-markers --junit-xml=ci_report.xml
         continue-on-error: false
  
+        #here i create a rport and using always() due to the reason that i always wnat a report no matter if it fails or succeeds because i will have to debug it there in the xml
       - name: Upload Test Report
         uses: actions/upload-artifact@v3
         if: always()
         with:
           name: junit-report
-          path: report.xml
+          path: ci_report.xml
 
         # Azure Container Registry (ACR)  
       - name: Log in to Azure Container Registry
