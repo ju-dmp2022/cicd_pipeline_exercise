@@ -2,6 +2,10 @@
 # GP = Good Practice
 name: Calculator Pipeline
 
+
+permissions:
+  checks: write  # Grant write access for checks API to create annotations
+
 on:
   push:
     branches: [main]
@@ -49,15 +53,15 @@ jobs:
 
       - name: Run Tests
         run: |
-          python -m pytest -s -v --maxfail=1 --exitfirst --strict-markers --junit-xml=tests/report.xml
+          python -m pytest -s -v --maxfail=1 --exitfirst --strict-markers --junit-xml=**/build/test-results/test/TEST-*.xml
         continue-on-error: false
 
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v4
-        if: always()  
-        # Ensures this step runs regardless of the outcome of previous steps
+      - name: register test
+        uses: mikepenz/action-junit-report@v3
+        if: always()
         with:
-          report_paths: 'tests/report.xml' 
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
         # Azure Container Registry (ACR)  
       - name: Log in to Azure Container Registry
