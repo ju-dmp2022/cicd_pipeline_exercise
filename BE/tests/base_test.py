@@ -3,6 +3,7 @@ from BE.calculator_helper import CalculatorHelper
 
 # GP = Good Practice
 class BaseCalculatorTest:
+    """establish calculator setup and teardown for the unittests/pytest on code logic"""
     
     #this will set the calculator up for each func
     def setup_method(self):
@@ -15,6 +16,7 @@ class BaseCalculatorTest:
         
         
 class BaseAPICalculatorTest:
+    """establish the baseurl and sutup + teardown for Integration tests"""
     
     def setup_method(self):
         """Setup resources before each test method"""

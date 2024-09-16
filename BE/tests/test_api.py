@@ -10,6 +10,7 @@ from assertpy import assert_that
 
 # GP = Good Practice
 class TestCalculatorAPI(BaseAPICalculatorTest):
+    """use the imported BaseAPICalculatorTest to pass in dynamic values to each function/test"""
     
     # (GP)
     @pytest.fixture

@@ -1,8 +1,14 @@
 import pytest
 from base_test import BaseCalculatorTest
 
+
 # GP = Good Practice
 class TestCalculatorHelper(BaseCalculatorTest):
+    """
+    use the imported 'BaseCalculatorTest' 
+    and use the fixture data to add 
+    fynamic values for the pytests
+    """
         
     #fixture to provide data (GP)
     @pytest.fixture
