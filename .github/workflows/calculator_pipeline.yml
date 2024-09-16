@@ -57,7 +57,7 @@ jobs:
         if: always()  
         # Ensures this step runs regardless of the outcome of previous steps
         with:
-          report_paths: 'report.xml' 
+          report_paths: 'tests/report.xml' 
 
         # Azure Container Registry (ACR)  
       - name: Log in to Azure Container Registry
