@@ -70,14 +70,17 @@ python -m pytest --maxfail=1 --exitfirst --strict-markers
 
 
 **Code Coverage**
+
 ´´´cmd
 python -m pytest --cov
 ´´´
+
 - **`--code-coverage`**: the other one way with "pytest" as start does not work for my machine and as a windows 10 and above user i recommend using this.
 
 ### Integration testing
 
 **API start**
+
 ´´´cmd
 python BE/calculator.py --rest
 ´´´
