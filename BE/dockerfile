@@ -14,10 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt -r requirements-test.txt
 
 
 # Set the entrypoint to python, so it runs the script
-ENTRYPOINT ["python", "calculator.py"]
+ENTRYPOINT ["uvicorn", "calculator_rest_service:app", "--host", "0.0.0.0", "--port", "5000"]
 
-# Providing default arguments to the entrypoint
-CMD ["--multiply", "3", "7"]
 
-# # this is just for documentation porpuses
-# EXPOSE 5000

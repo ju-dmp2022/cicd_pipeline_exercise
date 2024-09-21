@@ -5,3 +5,4 @@ numpy
 argparse
 opencensus-ext-azure
 httpx==0.24.0 
+munch==4.0.0
