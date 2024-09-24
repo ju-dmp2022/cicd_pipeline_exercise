@@ -40,30 +40,7 @@ class CalculatorHelper:
         }
     }
 
-    _instance = None
-    _is_initialized = False
-
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(CalculatorHelper, cls).__new__(cls)
-        return cls._instance
-
-    def __init__(self):
-        if not self._is_initialized:
-            self._user_list = []
-            self._current_user = None
-            admin = self.User('admin', 'test1234')
-            self._user_list.append(admin)
-            self._is_initialized = True
-            # self.logger = logging.getLogger(__name__)
-
-    class User:
-        def __init__(self, username, password):
-            self.username = username
-            self.password = password
-
-        def __repr__(self):
-            return f"User(username={self.username}, password={self.password})"
+ 
 
     def add(self, a, b):
         return a + b
