@@ -14,6 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt -r requirements-test.txt
 
 
 # Set the entrypoint to python, so it runs the script
-ENTRYPOINT ["uvicorn", "calculator_rest_service:app", "--host", "0.0.0.0", "--port", "5000"]
+ENTRYPOINT ["python3", "calculator_rest_service.py", "--port", "5001"]
 
 
