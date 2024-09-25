@@ -129,7 +129,7 @@ def main(args):
     args = parser.parse_args()
 
     # Listen on all network interfaces
-    app.run('0.0.0.0', port=args.flask_port, debug=args.debug)
+    #app.run('0.0.0.0', port=args.flask_port, debug=args.debug)
     uvicorn.run(app, host="0.0.0.0", port=args.port)
 
 if __name__ == '__main__':

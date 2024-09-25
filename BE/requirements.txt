@@ -6,3 +6,12 @@ argparse
 opencensus-ext-azure
 httpx==0.24.0 
 munch==4.0.0
+selenium
+webdriver-manager
+
+pytest==7.2.1
+coverage==6.5.0
+mock==5.0.0
+assertpy==1.1 # this is a powerful python library for connecting tests in a chain format
+requests==2.32.3
+
