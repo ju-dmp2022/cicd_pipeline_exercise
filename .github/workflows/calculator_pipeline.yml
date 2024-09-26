@@ -30,7 +30,7 @@ jobs:
             ~/.cache/pip 
           # the cache is really useful, cuz it checks the latest stored cache installation of dependencies or libraries
           # avoiding redundant work/installations => faster performing pipeline
-          key: ${{ runner.os }}-pip-${{ hashFiles('BE/requirements.txt') }}-${{ hashFiles('BE/requirements-test.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('BE/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -39,7 +39,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install -r requirements-test.txt
 
       - name: Start REST API
         working-directory: BE
