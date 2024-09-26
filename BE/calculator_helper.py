@@ -1,4 +1,4 @@
-import logger
+# import logger
 
 class CalculatorHelper():
     log_properties = {
@@ -22,7 +22,7 @@ class CalculatorHelper():
             admin = self.User('admin','test1234')
             self._user_list.append(admin)
             self._is_initialized = True
-            self.logger = logger.get_logger(__name__)
+            # self.logger = logger.get_logger(__name__)
 
     class User():
         def __init__(self, username, password):
@@ -33,7 +33,7 @@ class CalculatorHelper():
             return f"User(username={self.username}, password={self.password})"
 
     def add(self, a, b):
-        self.logger.debug("test")
+       
         return a + b
 
     def subtract(self, a, b):
@@ -43,6 +43,8 @@ class CalculatorHelper():
         return a * b
 
     def divide(self, a, b):
+        if b == 0:
+            return ZeroDivisionError
         return a / b
 
     def register_user(self, username, password):

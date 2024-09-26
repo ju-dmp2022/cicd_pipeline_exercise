@@ -62,7 +62,7 @@ class TestCalculatorAPI(BaseAPICalculatorTest):
         
         
         #assertion
-        assert calculated_value['result'] is ZeroDivisionError
+        assert calculated_value['detail'] == "float division by zero"
     
     
     # (GP)
