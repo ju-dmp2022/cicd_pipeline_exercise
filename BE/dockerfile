@@ -10,14 +10,10 @@ COPY . /calcapp/
 #Using --no-cache-dir during package installation in a Dockerfile
 #helps keep the Docker images smaller by avoiding the storage of unnecessary cached files.
 # Install dependencies from requirements.txt and requirements-test.txt
-RUN pip install --no-cache-dir -r requirements.txt -r requirements-test.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 
 # Set the entrypoint to python, so it runs the script
-ENTRYPOINT ["python", "calculator.py"]
+ENTRYPOINT ["python3", "calculator_rest_service.py", "--port", "5000"]
 
-# Providing default arguments to the entrypoint
-CMD ["--multiply", "3", "7"]
 
-# # this is just for documentation porpuses
-# EXPOSE 5000

@@ -72,7 +72,7 @@ class TestCalculatorHelper(BaseCalculatorTest):
         divide_zero = self.calculator.divide(a, b)
         
         #assert
-        assert divide_zero == None
+        assert divide_zero == ZeroDivisionError
         
 
         

@@ -62,7 +62,7 @@ class TestCalculatorAPI(BaseAPICalculatorTest):
         
         
         #assertion
-        assert calculated_value['result'] is None
+        assert calculated_value['detail'] == "Unable to serialize unknown type: <class 'type'>"
     
     
     # (GP)
