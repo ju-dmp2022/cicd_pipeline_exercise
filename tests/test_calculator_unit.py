@@ -1,5 +1,6 @@
 import pytest
 from base_test import BaseCalculatorTest
+from assertpy import assert_that
 
 
 # GP = Good Practice
@@ -28,7 +29,7 @@ class TestCalculatorHelper(BaseCalculatorTest):
         add = self.calculator.add(a, b)
         
         #assert
-        assert add == 30
+        assert_that(add).is_equal_to(30)
         
     #(GP)
     def test_subtract(self, value):
@@ -38,7 +39,7 @@ class TestCalculatorHelper(BaseCalculatorTest):
         
         sub = self.calculator.subtract(a, b)
         
-        assert sub == 36
+        assert_that(sub).is_equal_to(36)
         
     #(GP)
     def test_multiply(self, value):
@@ -48,7 +49,7 @@ class TestCalculatorHelper(BaseCalculatorTest):
         
         multi = self.calculator.multiply(a, b)
         
-        assert multi == -99
+        assert_that(multi).is_equal_to(-99)
         
     #(GP)
     def test_division(self, value):
@@ -58,9 +59,10 @@ class TestCalculatorHelper(BaseCalculatorTest):
         
         divide = self.calculator.divide(a, b)
         
-        assert divide == -11
+        assert_that(divide).is_equal_to(-11)
         
-    # exception
+        
+    # exception + (GP)
     def test_division_by_zero(self):
         """return None as exception when dividing by zero"""
         
@@ -72,7 +74,7 @@ class TestCalculatorHelper(BaseCalculatorTest):
         divide_zero = self.calculator.divide(a, b)
         
         #assert
-        assert divide_zero == ZeroDivisionError
+        assert_that(divide_zero).is_equal_to(ZeroDivisionError)
         
 
         

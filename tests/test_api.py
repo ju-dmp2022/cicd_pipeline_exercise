@@ -44,7 +44,7 @@ class TestCalculatorAPI(BaseAPICalculatorTest):
         calculated_value = response.json()
         
         # Assert and assert_that
-        assert calculated_value['result'] == 33
+        assert_that(calculated_value['result']).is_equal_to(33)
         assert_that(status).is_equal_to(200)
         
     
@@ -61,8 +61,8 @@ class TestCalculatorAPI(BaseAPICalculatorTest):
         calculated_value = response.json()
         
         
-        #assertion
-        assert calculated_value['detail'] == "Unable to serialize unknown type: <class 'type'>"
+        #assertion using assertpy 
+        assert_that(calculated_value['detail']).is_equal_to("Unable to serialize unknown type: <class 'type'>")
     
     
     # (GP)
@@ -87,7 +87,8 @@ class TestCalculatorAPI(BaseAPICalculatorTest):
         calculated_value = calculate.sync(client=client, body=Calculation(operation, operand1=a, operand2=b))
         
         # Assert
-        assert isinstance(calculated_value, ResultResponse)
-        assert calculated_value.result == 33
+        assert_that(isinstance(calculated_value, ResultResponse))
+        # print(str(isinstance(calculated_value, ResultResponse)), "jens code")
+        assert_that(calculated_value.result).is_equal_to(33)
         
     
