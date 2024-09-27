@@ -57,8 +57,8 @@ class TestReg(WebBase):
         password_id = "password1"
         password_repeat_id = "password2"
         logout_button_id = "logout-button"
-        name = "uchihaaa"
-        password = "Uchiha"
+        name = "Levi"
+        password = "Ackermann"
         already_exist = "errormsg"
 
         # Wait for the register button to be clickable

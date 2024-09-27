@@ -48,6 +48,12 @@ class TestForDivide(WebBase):
                 tab_button = self.driver.find_element(By.ID, calc_tab_id)
                 tab_button.click()
                 
+                history = self.driver.find_element(By.ID, "history").get_attribute("value").strip()
+                print(history)
+                
+                # Assert that the history content is not equal to the placeholder text
+                placeholder = "The history is empty..."
+                assert_that(history).is_not_equal_to(placeholder)
                 
                 # Get the result from the calculator screen
                 result_screen = self.driver.find_element(By.ID, result_screen_id)
