@@ -55,6 +55,7 @@ python -m openapi_python_client generate --url http://localhost:5000/openapi.jso
 ```cmd
 python -m pytest --maxfail=1 --exitfirst --strict-markers
 ```
+
 - **`python`**: This invokes the Python interpreter. It ensures that the command is executed using the correct Python environment, which is especially important when working with virtual environments.
 
 - **`-m`**: This flag tells Python to run a module as a script. The module name follows the `-m` flag. In this case, `pytest` is the module being executed.

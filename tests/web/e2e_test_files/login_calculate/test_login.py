@@ -23,8 +23,8 @@ class TestForLogin(WebBase):
         username_id = "username"
         password_id = "password"
         login_id = "login"
-        username = "admin"
-        password = "test1234"
+        username = "Levi"
+        password = "Ackermann"
         logout_button_id = "logout-button"
     
         
