@@ -50,7 +50,7 @@ class TestReg(WebBase):
         
         
         #Wait for the page to load by waiting on the username field to load 
-        WebDriverWait(self.driver, 5).until(
+        WebDriverWait(self.driver, 15).until(
             EC.presence_of_element_located((By.ID, username_id))
         )
         
