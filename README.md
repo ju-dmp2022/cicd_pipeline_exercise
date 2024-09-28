@@ -108,10 +108,28 @@ python BE/calculator.py --rest
  - then you probably need to run docker on your desktop, (right-click the logo on if you can find it in the windows bar and hit 'restart')
 
 
-### commands
+### commands (chronologic order)
+
+**in order to run the docker container you have to set up selenium in docker**
+```cmd
+docker run --name selenium -d --add-host host.docker.internal:host-gateway -p 4444:4444 -p 5900:5900 --shm-size="2g" selenium/standalone-chrome:4.2.1-20220531
+```
 
 **in order to run the docker container with the two images (FE DF & BE DF through the docker-compose.yml file in the root folder)**
 ```cmd
 docker compose -p webcalculator up -d  
 ```
 - the command will run the docker container, if u run it with the "-d" you will run the container in the background which allows you to execute commands after runner the command above
+
+**now you can run the test**
+```cmd
+python -m pytest -s -v
+```
+or
+```cmd
+pytest -s -v
+```
+or if you are on mac
+```cmd
+python3 -m pytest -s -v
+```

@@ -23,8 +23,6 @@ from tests.web.e2e_test_files.login_calculate.test_divide import TestForDivide
 # from tests.web.e2e_test_files.register.test_register import TestRegister
 
 
-
-        
         
 class TestReg(WebBase):
          
