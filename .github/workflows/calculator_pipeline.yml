@@ -47,8 +47,8 @@ jobs:
       - name: Start & Run Selenium in Docker Container
         run: |  
           docker run --name selenium -d --add-host host.docker.internal:host-gateway -p 4444:4444 -p 5900:5900 --shm-size="2g" selenium/standalone-chrome:4.2.1-20220531
-          sleep 30
-          docker-compose up -d
+          sleep 15
+          docker compose -p webcalculator up -d 
 
       - name: Run Tests
         working-directory: BE
