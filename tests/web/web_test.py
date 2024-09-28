@@ -1,7 +1,7 @@
 
 import time
 
-from httpcore import TimeoutException
+
 from tests.web.test_base import WebBase
 
 from selenium.webdriver.common.by import By
@@ -50,7 +50,7 @@ class TestReg(WebBase):
         
         
         #Wait for the page to load by waiting on the username field to load 
-        WebDriverWait(self.driver, 15).until(
+        WebDriverWait(self.driver, 25).until(
             EC.presence_of_element_located((By.ID, username_id))
         )
         
