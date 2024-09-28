@@ -12,7 +12,7 @@ COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
 # Set the remote server address and Nginx port as environment variables with default values
 ARG REMOTE_SERVER_ADDRESS=http://localhost:5000
-ARG WEB_SERVER_ADDRESS=http://localhost:8080
+ARG WEB_SERVER_ADDRESS=http://localhost:8080/login.html
 ARG NGINX_PORT=8080
 ENV REMOTE_SERVER_ADDRESS=${REMOTE_SERVER_ADDRESS}
 ENV WEB_SERVER_ADDRESS=${WEB_SERVER_ADDRESS}
@@ -20,7 +20,7 @@ ENV NGINX_PORT=${NGINX_PORT}
 
 
 # Create a config.js file with the remote server address
-RUN echo "window.config = { remoteServerAddress: 'http://host.docker.internal:5000', webServerAddress: 'http://host.docker.internal:8080' };" > /usr/share/nginx/html/config.js
+RUN echo "window.config = { remoteServerAddress: 'http://host.docker.internal:5000', webServerAddress: 'http://host.docker.internal:8080/login.html' };" > /usr/share/nginx/html/config.js
 # RUN echo "window.config = { remoteServerAddress: 'http://localhost:5000', webServerAddress: 'http://localhost:8080' };" > /usr/share/nginx/html/config.js
 
 # Replace the placeholders in the nginx configuration template with the actual environment variable values
