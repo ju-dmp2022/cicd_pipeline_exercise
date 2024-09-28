@@ -18,9 +18,10 @@ ENV REMOTE_SERVER_ADDRESS=${REMOTE_SERVER_ADDRESS}
 ENV WEB_SERVER_ADDRESS=${WEB_SERVER_ADDRESS}
 ENV NGINX_PORT=${NGINX_PORT}
 
+
 # Create a config.js file with the remote server address
-# RUN echo "window.config = { remoteServerAddress: 'http://host.docker.internal:5000', webServerAddress: 'http://host.docker.internal:8080' };" > /usr/share/nginx/html/config.js
-RUN echo "window.config = { remoteServerAddress: 'http://localhost:5000', webServerAddress: 'http://localhost:8080' };" > /usr/share/nginx/html/config.js
+RUN echo "window.config = { remoteServerAddress: 'http://host.docker.internal:5000', webServerAddress: 'http://host.docker.internal:8080' };" > /usr/share/nginx/html/config.js
+# RUN echo "window.config = { remoteServerAddress: 'http://localhost:5000', webServerAddress: 'http://localhost:8080' };" > /usr/share/nginx/html/config.js
 
 # Replace the placeholders in the nginx configuration template with the actual environment variable values
 RUN envsubst '${REMOTE_SERVER_ADDRESS} ${NGINX_PORT}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
@@ -33,3 +34,4 @@ CMD ["nginx", "-g", "daemon off;"]
 
 
 
+# docker run --name selenium -d --add -host host.docker.internal:host-gateway -p 4444:4444 -p 5900:5900 --shm-size="2g" selenium/standalone-chrome:4.2.1-20220531

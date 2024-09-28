@@ -47,6 +47,12 @@ jobs:
           sleep 10
         # Adjust this based on how long it takes for your server to start
 
+      - name: start running docker container
+        run: docker-compose up -d  
+
+      - name: run selenium in the ddocekr container
+        run: docker run --name selenium -d --add-host host.docker.internal:host-gateway -p 4444:4444 -p 5900:5900 --shm-size="2g" selenium/standalone-chrome:4.2.1-20220531
+
       - name: Run Tests
         run: |
           python -m pytest -s -v --maxfail=1 --exitfirst --strict-markers --junit-xml=ci_report.xml

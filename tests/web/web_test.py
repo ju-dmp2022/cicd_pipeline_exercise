@@ -23,27 +23,7 @@ from tests.web.e2e_test_files.login_calculate.test_divide import TestForDivide
 # from tests.web.e2e_test_files.register.test_register import TestRegister
 
 
-class TestWeb(WebBase):
-    
-    
-    def test_login_and_calculate(self):
-        """pass in the login data and login, then assert a destination element such as add, sub, multiply & divide"""
-        
-        
-        TestForLogin.login(self)
-        time.sleep(2)
-        
-        TestForAdd.calculate_add(self)
-        time.sleep(2)
-        
-        TestForSub.calculate_sub(self)
-        time.sleep(2)
-        
-        TestForMulti.calculate_multi(self)
-        time.sleep(2)
-        
-        TestForDivide.calculate_divide(self)
-        time.sleep(2)
+
         
         
 class TestReg(WebBase):
@@ -102,6 +82,28 @@ class TestReg(WebBase):
                 assert False, "Neither logout button nor error message found!"
         
         
+        
+class TestWeb(WebBase):
+    
+    
+    def test_login_and_calculate(self):
+        """pass in the login data and login, then assert a destination element such as add, sub, multiply & divide"""
+        
+        
+        TestForLogin.login(self)
+        time.sleep(2)
+        
+        TestForAdd.calculate_add(self)
+        time.sleep(2)
+        
+        TestForSub.calculate_sub(self)
+        time.sleep(2)
+        
+        TestForMulti.calculate_multi(self)
+        time.sleep(2)
+        
+        TestForDivide.calculate_divide(self)
+        time.sleep(2)
 
     
     
@@ -115,5 +117,6 @@ class TestReg(WebBase):
         
         
         
+
         
         
