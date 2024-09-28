@@ -55,6 +55,7 @@ python -m openapi_python_client generate --url http://localhost:5000/openapi.jso
 ```cmd
 python -m pytest --maxfail=1 --exitfirst --strict-markers
 ```
+
 - **`python`**: This invokes the Python interpreter. It ensures that the command is executed using the correct Python environment, which is especially important when working with virtual environments.
 
 - **`-m`**: This flag tells Python to run a module as a script. The module name follows the `-m` flag. In this case, `pytest` is the module being executed.
@@ -86,7 +87,17 @@ python BE/calculator.py --rest
 ´´´
 
 
- ## Docker Issues
+### END 2 END Test
+
+- perhaps add something important here 
+
+
+
+
+ ## Docker 
+
+
+ ### Docker Issues
 
  **docker is not running**
  - if you get an issue in the terminal when running any docker command that looks like this:
@@ -95,3 +106,12 @@ python BE/calculator.py --rest
  ERROR: error during connect: Head "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/_ping": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.¨
  ```
  - then you probably need to run docker on your desktop, (right-click the logo on if you can find it in the windows bar and hit 'restart')
+
+
+### commands
+
+**in order to run the docker container with the two images (FE DF & BE DF through the docker-compose.yml file in the root folder)**
+```cmd
+docker compose -p webcalculator up -d  
+```
+- the command will run the docker container, if u run it with the "-d" you will run the container in the background which allows you to execute commands after runner the command above
