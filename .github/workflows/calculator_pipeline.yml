@@ -20,6 +20,13 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install Docker and Docker Compose # New Step
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+
       - name: Cache Python dependencies
         uses: actions/cache@v3
         with:
@@ -47,7 +54,7 @@ jobs:
       - name: Start & Run Selenium in Docker Container
         run: |
           docker-compose up -d  
-        #docker run --name selenium -d --add-host host.docker.internal:host-gateway -p 4444:4444 -p 5900:5900 --shm-size="2g" selenium/standalone-chrome:4.2.1-20220531
+          docker run --name selenium -d --add-host host.docker.internal:host-gateway -p 4444:4444 -p 5900:5900 --shm-size="2g" selenium/standalone-chrome:4.2.1-20220531
 
       - name: Run Tests
         working-directory: BE
