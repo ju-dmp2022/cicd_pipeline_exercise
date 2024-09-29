@@ -29,19 +29,19 @@ pip install -r BE/requirements.txt
 - for more information on assertpy, chekout [assertpy documentation](https://pypi.org/project/assertpy/#description)
 
 **Check the current version of asssertpy**
-´´´cmd
+```cmd
 pip show assertpy
-´´´
+```
 
 **To install the openapi python client**
-´´´cmd
+```cmd
 pip install openapi-python-client
-´´´
+```
 
 **To install the API client folder**
-´´´cmd
+```cmd
 python -m openapi_python_client generate --url http://localhost:5000/openapi.json
-´´´
+```
 
 
 
