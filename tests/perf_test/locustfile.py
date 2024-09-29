@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 
 class CalculatorUser(HttpUser):
-    
+    """use 3rd party library locust elements to make execute Load tests for the /calculate endpoint"""
     # time_data = [2, 3, 4]
     # chosen_time_to_wait = random.choice(time_data)
     wait_time = between(2, 4)   
@@ -20,6 +20,7 @@ class CalculatorUser(HttpUser):
     @task
     @tag('add')
     def add(self):
+        """take the payload and make a addition post requests twice using the for-loop and log the result & execution-time"""
         data = [[1, 2, 3], [2, 5, 7]]
         
             
@@ -50,6 +51,7 @@ class CalculatorUser(HttpUser):
     @task    
     @tag('subtract')   
     def subtract(self):
+        """take the payload and make a subtraction post requests and log the result & execution-time"""
         data = [[1, 2, -1], [13, 5, 8]]
         data_insertion = random.choice(data)
         subtract = {
@@ -71,7 +73,8 @@ class CalculatorUser(HttpUser):
                 logging.info(f"Subtract operation succeeded: {data_insertion[0]} - {data_insertion[1]} = {response_data['result']}")
                 
     @task    
-    @tag('multiply')   
+    @tag('multiply') 
+    
     def multi(self):
         data = [[1, 2, 2], [3, 5, 15]]
         data_insertion = random.choice(data)
@@ -88,6 +91,7 @@ class CalculatorUser(HttpUser):
                 
     @task    
     @tag('divide')   
+    
     def divide(self):
         data = [[9, -3, -3], [15, 5, 3]]
         data_insertion = random.choice(data)
