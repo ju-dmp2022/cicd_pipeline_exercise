@@ -1,6 +1,6 @@
 from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service as ChromeService
-# from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from tests.calculator_client import Client
 from tests.calculator_client.api.actions import logout
 
@@ -11,7 +11,7 @@ class WebBase:
         """ Setup to run once
             Initiatiung some common parameters
         """
-        cls.app_url = 'http://host.docker.internel:8080'
+        cls.app_url = 'http://host.docker.internal:8080'
 
     def setup_method(self):
         """ Setup to run before every test
