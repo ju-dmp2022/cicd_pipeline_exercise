@@ -1,152 +1,62 @@
-
+import pytest
 import time
+from assertpy import assert_that
 from tests.web.test_base import WebBase
-import time
+from tests.web.pages.login_page import LoginPage
+from tests.web.pages.calculator_page import CalculatorPage
 from tests.web.pages.register_page import RegisterPage
-from tests.web.pages.calculation import Calculate
-from tests.web.pages.history_check import HistoryCheck
 import random
 import string
-from assertpy import assert_that
-        
-class TestScenarios(WebBase):
-    """test the different scenarios for e2e tests"""
-    
+
+class TestWeb(WebBase):
+
+    def test_login(self):
+        LoginPage(self.driver).login('admin', 'test1234')
+        assert_that(CalculatorPage(self.driver).elements.username.text).is_equal_to('admin')
+
+
     def generate_random_username(self, length=8):
-        """generate a random username to acoid issues with tests in dev"""
+        """Generate a random username to avoid conflicts."""
         letters = string.ascii_lowercase
         return ''.join(random.choice(letters) for i in range(length))
+      
         
-     
-    
+
     def test_register(self):
-        """Test registration functionality & verify successful reg"""
-        
-        rp = RegisterPage(self.driver)
-        unigue_name = self.generate_random_username()
-        rp.click_register()
-        
-        rp.register(unigue_name, 'toji', 'toji')
-        time.sleep(3)
-        assert_that()
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        # LoginPage(self.driver).page_elements['register'].click()
-        # LoginPage(self.driver).page_elements['username'].set('Toji')
-        # LoginPage(self.driver).page_elements['password'].set('zenin999')
-        # LoginPage(self.driver).page_elements['password-verify'].set('zenin999')
-        # LoginPage(self.driver).page_elements['register'].click()
-        # time.sleep(3)
-       
-        # assert LoginPage(self.driver).page_elements['logout'].text == 'Logout'
-        # LoginPage(self.driver).page_elements['logout'].click()
-        # time.sleep(2)
-        
-    def test_calculation(self):
-        """execute calculations and verify the assertions"""
-        #login
-        
-        
-        Calculate(self.driver).page_elements['username'].set('Toji')
-        Calculate(self.driver).page_elements['password'].set('zenin999')
-        Calculate(self.driver).page_elements['login'].click()
-        time.sleep(2)
-        
-        #verify the login
-        assert LoginPage(self.driver).page_elements['logout'].text == 'Logout'
-        
-        
-        #addtion calculations and check
-        Calculate(self.driver).page_elements['choice1'].click()
-        Calculate(self.driver).page_elements['add'].click()
-        Calculate(self.driver).page_elements['choice2'].click()
-        Calculate(self.driver).page_elements['sum'].click()
-        assert Calculate(self.driver).page_elements['result'].value == '8'
-        
-        
-        #subtract calculations and check
-        Calculate(self.driver).page_elements['choice1'].click()
-        Calculate(self.driver).page_elements['sub'].click()
-        Calculate(self.driver).page_elements['choice2'].click()
-        Calculate(self.driver).page_elements['sum'].click()
-        assert Calculate(self.driver).page_elements['result'].value == '4'
-        
-        #multiplication calculations and check
-        Calculate(self.driver).page_elements['choice1'].click()
-        Calculate(self.driver).page_elements['multi'].click()
-        Calculate(self.driver).page_elements['choice2'].click()
-        Calculate(self.driver).page_elements['sum'].click()
-        assert Calculate(self.driver).page_elements['result'].value == '12'
-        
-        #division calculations and check
-        Calculate(self.driver).page_elements['choice1'].click()
-        Calculate(self.driver).page_elements['div'].click()
-        Calculate(self.driver).page_elements['choice2'].click()
-        Calculate(self.driver).page_elements['sum'].click()
-        assert Calculate(self.driver).page_elements['result'].value == '3'
-        
-        
-        LoginPage(self.driver).page_elements['logout'].click()
-        assert Calculate(self.driver).page_elements['login'].text == 'Login'
-        time.sleep(2)
-        
+        login_page = LoginPage(self.driver)
+        login_page.click_register()
+
+        register_page = RegisterPage(self.driver)
+        unique_username = self.generate_random_username()
+        register_page.register_user(unique_username, 'test123', 'test123')
+        time.sleep(5)
+        assert_that(CalculatorPage(self.driver).elements.username.text).is_equal_to(unique_username)
+
+
+      
+    
+    @pytest.mark.parametrize("operation, operand1, operand2, expected_result", [
+        ('add', 5, 3, '8'),
+        ('subtract', 10, 3, '7'),
+        ('multiply', 4, 5, '20'),
+        ('divide', 8, 2, '4'),
+    ])
+    def test_calculation(self, operation, operand1, operand2, expected_result):
+        LoginPage(self.driver).login('admin', 'test1234')
+        calculator_page = CalculatorPage(self.driver)
+        calculator_page.perform_operation(operation, operand1, operand2)
+        assert_that(calculator_page.get_result()).is_equal_to(expected_result)
+ 
+
+    
     def test_history(self):
-        """implement a scenario that verfies the history feature of the calculator"""
-        
-        # Login
-        HistoryCheck(self.driver).page_elements['username'].set('Toji')
-        HistoryCheck(self.driver).page_elements['password'].set('zenin999')
-        HistoryCheck(self.driver).page_elements['login'].click()
-        time.sleep(2)
-       
-        #verify the login
-        assert LoginPage(self.driver).page_elements['logout'].text == 'Logout'
-        
-        
-        # Perform calculations
-        
-        #addtion calculations and check
-        HistoryCheck(self.driver).page_elements['choice1'].click()
-        HistoryCheck(self.driver).page_elements['add'].click()
-        HistoryCheck(self.driver).page_elements['choice2'].click()
-        HistoryCheck(self.driver).page_elements['sum'].click()
-        assert HistoryCheck(self.driver).page_elements['result'].value == '8'
-        
-        
-        # Open the history by clicking the '>>'-button
-        
-        
-        
-        # Verify previous calculations are shown
-    
-    
-    
-
-        
-        
-        
-    
-        
-        
-        
-        
-
-        
-        
+        LoginPage(self.driver).login('admin', 'test1234')
+        calculator_page = CalculatorPage(self.driver)
+        calculator_page.perform_operation('add', 5, 3)
+        calculator_page.perform_operation('subtract', 10, 3)
+        calculator_page.open_history()
+        time.sleep(5)
+        calculator_page.get_history()
+        history_text = calculator_page.get_history()
+        assert_that(history_text).contains('5+3=8')
+        assert_that(history_text).contains('10-3=7')
