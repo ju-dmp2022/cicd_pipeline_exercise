@@ -1,108 +1,140 @@
 
 import time
-
-
 from tests.web.test_base import WebBase
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
-
 import time
+from tests.web.pages.register_page import RegisterPage
+from tests.web.pages.calculation import Calculate
+from tests.web.pages.history_check import HistoryCheck
+import random
+import string
 from assertpy import assert_that
-
-#these are for the login and calculate
-from tests.web.e2e_test_files.login_calculate.test_login import TestForLogin 
-from tests.web.e2e_test_files.login_calculate.test_add import TestForAdd
-from tests.web.e2e_test_files.login_calculate.test_sub import TestForSub
-from tests.web.e2e_test_files.login_calculate.test_multi import TestForMulti
-from tests.web.e2e_test_files.login_calculate.test_divide import TestForDivide
-
-#these are for the register test
-# from tests.web.e2e_test_files.register.test_register import TestRegister
-
-
         
-class TestReg(WebBase):
-         
+class TestScenarios(WebBase):
+    """test the different scenarios for e2e tests"""
+    
+    def generate_random_username(self, length=8):
+        """generate a random username to acoid issues with tests in dev"""
+        letters = string.ascii_lowercase
+        return ''.join(random.choice(letters) for i in range(length))
+        
+     
+    
     def test_register(self):
-        """Test registration functionality & verify it"""
-
-        # Initialize the variables for the register
-        register_id = "register"
-        username_id = "username"
-        password_id = "password1"
-        password_repeat_id = "password2"
-        logout_button_id = "logout-button"
-        name = "Levi"
-        password = "Ackermann"
-        already_exist = "errormsg"
-
-        # Wait for the register button to be clickable
-        WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located((By.ID, register_id))
-        )
-        register_button = self.driver.find_element(By.ID, register_id)
-        register_button.click()
+        """Test registration functionality & verify successful reg"""
+        
+        rp = RegisterPage(self.driver)
+        unigue_name = self.generate_random_username()
+        rp.click_register()
+        
+        rp.register(unigue_name, 'toji', 'toji')
+        time.sleep(3)
+        assert_that()
         
         
-        #Wait for the page to load by waiting on the username field to load 
-        WebDriverWait(self.driver, 25).until(
-            EC.presence_of_element_located((By.ID, username_id))
-        )
         
-        username_input = self.driver.find_element(By.ID, username_id)
-        username_input.send_keys(name)
         
-        password_input = self.driver.find_element(By.ID, password_id)
-        password_input.send_keys(password)
         
-        password_input_repeat = self.driver.find_element(By.ID, password_repeat_id)
-        password_input_repeat.send_keys(password)
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        # LoginPage(self.driver).page_elements['register'].click()
+        # LoginPage(self.driver).page_elements['username'].set('Toji')
+        # LoginPage(self.driver).page_elements['password'].set('zenin999')
+        # LoginPage(self.driver).page_elements['password-verify'].set('zenin999')
+        # LoginPage(self.driver).page_elements['register'].click()
+        # time.sleep(3)
+       
+        # assert LoginPage(self.driver).page_elements['logout'].text == 'Logout'
+        # LoginPage(self.driver).page_elements['logout'].click()
+        # time.sleep(2)
+        
+    def test_calculation(self):
+        """execute calculations and verify the assertions"""
+        #login
+        
+        
+        Calculate(self.driver).page_elements['username'].set('Toji')
+        Calculate(self.driver).page_elements['password'].set('zenin999')
+        Calculate(self.driver).page_elements['login'].click()
         time.sleep(2)
         
-        register_user = self.driver.find_element(By.XPATH, '//*[@id="register"]')
-        register_user.click()
+        #verify the login
+        assert LoginPage(self.driver).page_elements['logout'].text == 'Logout'
+        
+        
+        #addtion calculations and check
+        Calculate(self.driver).page_elements['choice1'].click()
+        Calculate(self.driver).page_elements['add'].click()
+        Calculate(self.driver).page_elements['choice2'].click()
+        Calculate(self.driver).page_elements['sum'].click()
+        assert Calculate(self.driver).page_elements['result'].value == '8'
+        
+        
+        #subtract calculations and check
+        Calculate(self.driver).page_elements['choice1'].click()
+        Calculate(self.driver).page_elements['sub'].click()
+        Calculate(self.driver).page_elements['choice2'].click()
+        Calculate(self.driver).page_elements['sum'].click()
+        assert Calculate(self.driver).page_elements['result'].value == '4'
+        
+        #multiplication calculations and check
+        Calculate(self.driver).page_elements['choice1'].click()
+        Calculate(self.driver).page_elements['multi'].click()
+        Calculate(self.driver).page_elements['choice2'].click()
+        Calculate(self.driver).page_elements['sum'].click()
+        assert Calculate(self.driver).page_elements['result'].value == '12'
+        
+        #division calculations and check
+        Calculate(self.driver).page_elements['choice1'].click()
+        Calculate(self.driver).page_elements['div'].click()
+        Calculate(self.driver).page_elements['choice2'].click()
+        Calculate(self.driver).page_elements['sum'].click()
+        assert Calculate(self.driver).page_elements['result'].value == '3'
+        
+        
+        LoginPage(self.driver).page_elements['logout'].click()
+        assert Calculate(self.driver).page_elements['login'].text == 'Login'
         time.sleep(2)
         
-        try:
-            logout_button = self.driver.find_element(By.ID, logout_button_id)
-            assert_that(logout_button.text).is_equal_to("Logout")
-
-        except NoSuchElementException:
-            # If the logout button is not found, check for the error message
-            try:
-                error_message = self.driver.find_element(By.ID, already_exist)
-                assert_that(error_message.text).is_equal_to("User already exists!")
-            except NoSuchElementException:
-                assert False, "Neither logout button nor error message found!"
+    def test_history(self):
+        """implement a scenario that verfies the history feature of the calculator"""
         
-        
-        
-class TestWeb(WebBase):
-    
-    
-    def test_login_and_calculate(self):
-        """pass in the login data and login, then assert a destination element such as add, sub, multiply & divide"""
-        
-        
-        TestForLogin.login(self)
+        # Login
+        HistoryCheck(self.driver).page_elements['username'].set('Toji')
+        HistoryCheck(self.driver).page_elements['password'].set('zenin999')
+        HistoryCheck(self.driver).page_elements['login'].click()
         time.sleep(2)
+       
+        #verify the login
+        assert LoginPage(self.driver).page_elements['logout'].text == 'Logout'
         
-        TestForAdd.calculate_add(self)
-        time.sleep(2)
         
-        TestForSub.calculate_sub(self)
-        time.sleep(2)
+        # Perform calculations
         
-        TestForMulti.calculate_multi(self)
-        time.sleep(2)
+        #addtion calculations and check
+        HistoryCheck(self.driver).page_elements['choice1'].click()
+        HistoryCheck(self.driver).page_elements['add'].click()
+        HistoryCheck(self.driver).page_elements['choice2'].click()
+        HistoryCheck(self.driver).page_elements['sum'].click()
+        assert HistoryCheck(self.driver).page_elements['result'].value == '8'
         
-        TestForDivide.calculate_divide(self)
-        time.sleep(2)
-
+        
+        # Open the history by clicking the '>>'-button
+        
+        
+        
+        # Verify previous calculations are shown
     
     
     
