@@ -15,6 +15,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 # Set the entrypoint to python, so it runs the script
-ENTRYPOINT ["python", "calculator_rest_service.py", "--port", "5000", "--rest"]
+ENTRYPOINT ["python", "calculator.py", "--rest"]
 
 

@@ -1,6 +1,6 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.chrome.service import Service as ChromeService
+# from webdriver_manager.chrome import ChromeDriverManager
 from tests.calculator_client import Client
 from tests.calculator_client.api.actions import logout
 
